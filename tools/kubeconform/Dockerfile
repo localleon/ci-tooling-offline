@@ -31,8 +31,10 @@ LABEL org.opencontainers.image.title="ci-tooling-offline/kubeconform" \
 # Upgrade base packages and install the two tools in a single layer,
 # then remove curl so it does not remain in the final image.
 RUN apk upgrade --no-cache \
-    && apk add --no-cache curl make \
-    \
+    && apk add --no-cache \
+    curl make \
+    nodejs npm \
+    git openssh-client \
     # ── kubeconform ──────────────────────────────────────────────────────────
     && curl -fsSL \
     "https://github.com/yannh/kubeconform/releases/download/${KUBECONFORM_VERSION}/kubeconform-linux-amd64.tar.gz" \
